@@ -1,0 +1,47 @@
+"""
+Name: Employee Salary Analysis Program
+Author: [Your Name Here]
+Summary: This program inputs employee names and salaries, calculates the average salary,
+         and identifies employees with salaries within 5,000 of the average.
+Variables:
+    names (list of str): Stores employee names
+    salaries (list of float): Stores employee salaries in thousands
+    sentinel (str): Sentinel value to end input ("END")
+    salary (float): Temporary variable for salary input
+    total_salary (float): Sum of all salaries
+    average_salary (float): Average of all salaries
+"""
+
+# Initialize empty lists for names and salaries
+names = []
+salaries = []
+sentinel = "END"
+
+# Input loop
+while True:
+    name = input("Enter employee name (or 'END' to finish): ")
+    if name.upper() == sentinel:
+        break
+    
+    salary = float(input("Enter salary in thousands (e.g., 36.5 for $36,500): "))
+    
+    names.append(name)
+    salaries.append(salary * 1000)  # Convert to full dollar amount
+
+# Calculate average salary
+total_salary = sum(salaries)
+average_salary = total_salary / len(salaries) if salaries else 0
+
+# Display all employees and their salaries
+print("\n1. Employee Names and Salaries:")
+for name, salary in zip(names, salaries):
+    print(f"{name}: ${salary:,.2f}")
+
+# Display average salary
+print(f"\n2. Average Salary: ${average_salary:,.2f}")
+
+# Display employees within 5,000 of the average
+print("\n3. Employees within $5,000 of the average salary:")
+for name, salary in zip(names, salaries):
+    if abs(salary - average_salary) <= 5000:
+        print(f"{name}: ${salary:,.2f}")
